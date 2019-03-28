@@ -26,7 +26,7 @@ echo "CONFIG_LOG_FILE_PATH is $CONFIG_LOG_FILE_PATH" >> $LOGPATH
 cd "/home/$AZUREUSER";
 
 
-sudo -u $AZUREUSER /bin/bash -c "wget -N ${ARTIFACTS_URL_PREFIX}/scripts/configure-quorum-azureuser.sh";
+sudo -u $AZUREUSER /bin/bash -c "wget -N https://raw.githubusercontent.com/sysgain/vvivekbc/master/configure-quorum-azureuser.sh";
 
 ##################################
 # Initiate loop for error checking
