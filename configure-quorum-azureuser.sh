@@ -39,6 +39,8 @@ echo "GETH_IPC_PORT is $GETH_IPC_PORT"
 echo "NUM_VOTERS is $NUM_VOTERS"
 echo "VN_NODE_PREFIX is $VN_NODE_PREFIX"
 echo "NUM_BLOCKMAKERS is $NUM_BLOCKMAKERS"
+echo "BM_NODE_PREFIX is $BM_NODE_PREFIX"
+echo "NUM_OBSERVERS is $NUM_OBSERVERS"
 echo "OB_NODE_PREFIX is $OB_NODE_PREFIX"
 echo "NODE_SEQNUM is $NODE_SEQNUM"
 echo "ADMIN_SITE_PORT is $ADMIN_SITE_PORT"
@@ -116,13 +118,18 @@ cd $HOMEDIR
 declare -a NODE_KEYS
 declare -a NODE_IDS
 for i in `seq 0 $(($NUM_VOTERS - 1))`; do
+    echo "===================VIVEK BUILD node keys and node IDs1========================"
+    echo "The value of i is: $i"
     BOOT_NODE_HOSTNAME=$VN_NODE_PREFIX$i;
+    echo "The value of BOOT_NODE_HOSTNAME is: $BOOT_NODE_HOSTNAME"
     NODE_KEYS[$i]=`echo $BOOT_NODE_HOSTNAME | sha256sum | cut -d ' ' -f 1`;
+    echo "The value of NODE_KEYS[$i] is: $NODE_KEYS[$i]"
     setsid geth -nodekeyhex ${NODE_KEYS[$i]} > $HOMEDIR/tempbootnodeoutput 2>&1 &
     while sleep 10; do
         if [ -s $HOMEDIR/tempbootnodeoutput ]; then
             killall geth;
             NODE_IDS[$i]=`grep -Po '(?<=\/\/).*(?=@)' $HOMEDIR/tempbootnodeoutput`;
+            echo "The value of NODE_IDS[$i] is: $NODE_IDS[$i]"
             rm $HOMEDIR/tempbootnodeoutput;
             if [ $? -ne 0 ]; then
                 exit 1;
@@ -132,14 +139,20 @@ for i in `seq 0 $(($NUM_VOTERS - 1))`; do
     done
 done
 for i in `seq $NUM_VOTERS $(($NUM_VOTERS + $NUM_BLOCKMAKERS - 1))`; do
+    echo "===================VIVEK BUILD node keys and node IDs2========================"
+    echo "The value of i is: $i"
     TEMP_SEQNUM=`expr $i - $NUM_VOTERS`
+    echo "The value of TEMP_SEQNUM is: $TEMP_SEQNUM "
     BOOT_NODE_HOSTNAME=$BM_NODE_PREFIX$TEMP_SEQNUM;
+    echo "The value of BOOT_NODE_HOSTNAME is $BOOT_NODE_HOSTNAME"
     NODE_KEYS[$i]=`echo $BOOT_NODE_HOSTNAME | sha256sum | cut -d ' ' -f 1`;
+    echo "The value of NODE_KEYS[$i] is: $NODE_KEYS[$i]"
     setsid geth -nodekeyhex ${NODE_KEYS[$i]} > $HOMEDIR/tempbootnodeoutput 2>&1 &
     while sleep 10; do
         if [ -s $HOMEDIR/tempbootnodeoutput ]; then
             killall geth;
             NODE_IDS[$i]=`grep -Po '(?<=\/\/).*(?=@)' $HOMEDIR/tempbootnodeoutput`;
+            echo "The value of NODE_IDS[$i] is: $NODE_IDS[$i]"
             rm $HOMEDIR/tempbootnodeoutput;
             if [ $? -ne 0 ]; then
                 exit 1;
@@ -153,11 +166,13 @@ done
 # Check for empty node keys or IDs
 ##################################
 for nodekey in "${NODE_KEYS[@]}"; do
+    echo "The value of NODE_KEYS[@] is $NODE_KEYS[@]"
     if [ -z $nodekey ]; then
         exit 1;
     fi
 done
 for nodeid in "${NODE_IDS[@]}"; do
+    echo "The value of NODE_IDS[@] is $NODE_IDS[@]"
     if [ -z $nodeid ]; then
         exit 1;
     fi
