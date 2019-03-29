@@ -418,17 +418,22 @@ geth --exec 'loadScript("check-registration-complete.js")' attach
 if [ $? -ne 0 ]; then echo "Failed to check if registration was complete. Exiting"; exit 1; fi
 
 wget -N ${ARTIFACTS_URL_PREFIX}/scripts/start-cakeshop.sh;
-/bin/bash $HOMEDIR/start-cakeshop.sh $GETH_CFG_FILE_PATH || exit 1;
+echo "GETH_CFG_FILE_PATH: $GETH_CFG_FILE_PATH"
+echo "AZUREUSER: $AZUREUSER"
+echo "HOMEDIR: $HOMEDIR"
+echo "GETH_CFG_FILE_PATH: $GETH_CFG_FILE_PATH"
+echo "PASSWD: $PASSWD"
+#/bin/bash $HOMEDIR/start-cakeshop.sh $GETH_CFG_FILE_PATH || exit 1;
 
 ###############################################
 # Setup rc.local for services to start on boot
 ###############################################
-START_CMD="#!/bin/bash\nsudo -u $AZUREUSER /bin/bash $HOMEDIR/start-private-blockchain.sh $GETH_CFG_FILE_PATH $PASSWD";
-START_CMD="$START_CMD\nsudo -u $AZUREUSER /bin/bash $HOMEDIR/start-cakeshop.sh $GETH_CFG_FILE_PATH";
-echo -e $START_CMD | sudo tee /etc/rc.local 2>&1 1>/dev/null
-if [ $? -ne 0 ]; then
-    exit 1;
-fi
+#START_CMD="#!/bin/bash\nsudo -u $AZUREUSER /bin/bash $HOMEDIR/start-private-blockchain.sh $GETH_CFG_FILE_PATH $PASSWD";
+#START_CMD="$START_CMD\nsudo -u $AZUREUSER /bin/bash $HOMEDIR/start-cakeshop.sh $GETH_CFG_FILE_PATH";
+#echo -e $START_CMD | sudo tee /etc/rc.local 2>&1 1>/dev/null
+#if [ $? -ne 0 ]; then
+#    exit 1;
+#fi
 
 echo "Commands succeeded. Exiting";
 exit 0;
