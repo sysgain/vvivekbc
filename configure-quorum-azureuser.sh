@@ -414,8 +414,8 @@ wget -N ${ARTIFACTS_URL_PREFIX}/check-registration-complete-template.js || exit 
 NUM_NODES=$(($NUM_VOTERS + $NUM_BLOCKMAKERS + $NUM_OBSERVERS));
 sed s/#NUM_NODES/$NUM_NODES/ $HOMEDIR/check-registration-complete-template.js > $HOMEDIR/check-registration-complete.js || exit 1;
 rm $HOMEDIR/check-registration-complete-template.js;
-geth --exec 'loadScript("check-registration-complete.js")' attach
-if [ $? -ne 0 ]; then echo "Failed to check if registration was complete. Exiting"; exit 1; fi
+#geth --exec 'loadScript("check-registration-complete.js")' attach
+#if [ $? -ne 0 ]; then echo "Failed to check if registration was complete. Exiting"; exit 1; fi
 
 wget -N ${ARTIFACTS_URL_PREFIX}/scripts/start-cakeshop.sh;
 echo "GETH_CFG_FILE_PATH: $GETH_CFG_FILE_PATH"
