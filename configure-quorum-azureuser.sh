@@ -404,20 +404,24 @@ echo "===== Sent registration transaction =====";
 ###################################################
 # Install and start cakeshop
 ###################################################
-cd $HOMEDIR
-sudo -u $AZUREUSER /bin/bash -c "wget -N ${ARTIFACTS_URL_PREFIX}/scripts/configure-cakeshop.sh";
-/bin/bash $HOMEDIR/configure-cakeshop.sh $GETH_CFG_FILE_PATH || exit 1;
+##cd $HOMEDIR
+##sudo -u $AZUREUSER /bin/bash -c "wget -N ${ARTIFACTS_URL_PREFIX}/scripts/configure-cakeshop.sh";
+##/bin/bash $HOMEDIR/configure-cakeshop.sh $GETH_CFG_FILE_PATH || exit 1;
 
 # Wait for all nodes to register their constellation IDs before starting cakeshop
 # as cakeshop will submit transactions on startup that can interfere with registration
-wget -N ${ARTIFACTS_URL_PREFIX}/check-registration-complete-template.js || exit 1;
-NUM_NODES=$(($NUM_VOTERS + $NUM_BLOCKMAKERS + $NUM_OBSERVERS));
-sed s/#NUM_NODES/$NUM_NODES/ $HOMEDIR/check-registration-complete-template.js > $HOMEDIR/check-registration-complete.js || exit 1;
-rm $HOMEDIR/check-registration-complete-template.js;
+#wget -N ${ARTIFACTS_URL_PREFIX}/check-registration-complete-template.js || exit 1;
+#NUM_NODES=$(($NUM_VOTERS + $NUM_BLOCKMAKERS + $NUM_OBSERVERS));
+#sed s/#NUM_NODES/$NUM_NODES/ $HOMEDIR/check-registration-complete-template.js > $HOMEDIR/check-registration-complete.js || exit 1;
+#rm $HOMEDIR/check-registration-complete-template.js;
 #geth --exec 'loadScript("check-registration-complete.js")' attach
 #if [ $? -ne 0 ]; then echo "Failed to check if registration was complete. Exiting"; exit 1; fi
 
 wget -N ${ARTIFACTS_URL_PREFIX}/scripts/start-cakeshop.sh;
+echo "NUM_VOTERS: $NUM_VOTERS"
+echo "NUM_BLOCKMAKERS $NUM_BLOCKMAKERS"
+echo "NUM_OBSERVERS $NUM_OBSERVERS"
+echo "NUM_NODES $NUM_NODES"
 echo "GETH_CFG_FILE_PATH: $GETH_CFG_FILE_PATH"
 echo "AZUREUSER: $AZUREUSER"
 echo "HOMEDIR: $HOMEDIR"
