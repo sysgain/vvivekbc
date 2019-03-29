@@ -11,6 +11,24 @@ ARTIFACTS_URL_PREFIX=$4
 LOGPATH="/tmp/viveklog"
 echo "AZUREUSER is $AZUREUSER" >> $LOGPATH
 echo "ARTIFACTS_URL_PREFIX is $ARTIFACTS_URL_PREFIX" >> $LOGPATH
+echo $1 >> $LOGPATH
+echo $2 >> $LOGPATH
+echo $3 >> $LOGPATH
+echo $4 >> $LOGPATH
+echo $5 >> $LOGPATH
+echo $6 >> $LOGPATH
+echo $7 >> $LOGPATH
+echo $8 >> $LOGPATH
+echo $9 >> $LOGPATH
+echo ${10} >> $LOGPATH
+echo ${11} >> $LOGPATH
+echo ${12} >> $LOGPATH
+echo ${13} >> $LOGPATH
+echo ${14} >> $LOGPATH
+echo ${15} >> $LOGPATH
+echo ${16} >> $LOGPATH
+echo ${17} >> $LOGPATH
+echo ${18} >> $LOGPATH
 
 ###########
 # Constants
