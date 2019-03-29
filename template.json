@@ -694,7 +694,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://github.com/sysgain/vvivekbc/blob/master/VMExtension-Observers.json",
+                    "uri": "https://github.com/sysgain/vvivekbc/blob/master/VMExtension.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
