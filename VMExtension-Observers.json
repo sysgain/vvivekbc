@@ -73,11 +73,11 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": [
-            "[concat(parameters('artifactsLocationURL'), '/scripts/configure.sh')]"
+            "https://raw.githubusercontent.com/sysgain/vvivekbc/master/test.sh"
           ]
         },
         "protectedSettings": {
-          "commandToExecute": "[concat('/bin/bash configure.sh \"', parameters('adminUsername'), '\" \"', parameters('ethereumAccountPsswd'), '\" \"', parameters('passphrase'), '\" \"', parameters('artifactsLocationURL'), '\" \"', parameters('ethereumNetworkID'), '\" \"', variables('maxPeers'), '\" \"', variables('obNode'), '\" \"', parameters('gethIPCPort'), '\" \"', parameters('numVoters'), '\" \"', parameters('voterVMNamePrefix'), '\" \"', parameters('numBMs'), '\" \"', parameters('bmVMNamePrefix'), '\" \"', parameters('numObservers'), '\" \"', parameters('observerVMNamePrefix'), '\" \"', copyIndex(), '\" \"', parameters('adminSitePort'), '\" \"', parameters('cakeshopFqdn'), '\" \"', parameters('cakeshopStartingPort'), '\"')]"
+          "commandToExecute": "[concat('/bin/bash test.sh \"', parameters('adminUsername'), '\" \"', parameters('ethereumAccountPsswd'), '\" \"', parameters('passphrase'), '\" \"', parameters('artifactsLocationURL'), '\" \"', parameters('ethereumNetworkID'), '\" \"', variables('maxPeers'), '\" \"', variables('obNode'), '\" \"', parameters('gethIPCPort'), '\" \"', parameters('numVoters'), '\" \"', parameters('voterVMNamePrefix'), '\" \"', parameters('numBMs'), '\" \"', parameters('bmVMNamePrefix'), '\" \"', parameters('numObservers'), '\" \"', parameters('observerVMNamePrefix'), '\" \"', copyIndex(), '\" \"', parameters('adminSitePort'), '\" \"', parameters('cakeshopFqdn'), '\" \"', parameters('cakeshopStartingPort'), '\"')]"
         }
       }
     }
