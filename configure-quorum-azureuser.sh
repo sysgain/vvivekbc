@@ -387,19 +387,21 @@ printf "%s\n" "CAKESHOP_STARTING_PORT=$CAKESHOP_STARTING_PORT" >> $GETH_CFG_FILE
 #############
 # Start geth
 #############
-/bin/bash $HOMEDIR/start-private-blockchain.sh $GETH_CFG_FILE_PATH $PASSWD || exit 1;
+#/bin/bash $HOMEDIR/start-private-blockchain.sh $GETH_CFG_FILE_PATH $PASSWD || exit 1;
+echo "GETH_CFG_FILE_PATH: $GETH_CFG_FILE_PATH"
+echo "PASSWD $PASSWD"
 
 ######################################################################
 # Submit registry transaction to register this nodes constellation ID
 ######################################################################
-sleep 30
-echo "===== Sending registration transaction =====";
-set -x;
-cd $HOMEDIR
-geth --exec 'loadScript("submit-registry-tx.js")' attach
-if [ $? -ne 0 ]; then echo "Failed to register constellation ID. Exiting"; exit 1; fi
-set +x;
-echo "===== Sent registration transaction =====";
+##sleep 30
+##echo "===== Sending registration transaction =====";
+##set -x;
+##cd $HOMEDIR
+##geth --exec 'loadScript("submit-registry-tx.js")' attach
+##if [ $? -ne 0 ]; then echo "Failed to register constellation ID. Exiting"; exit 1; fi
+##set +x;
+##echo "===== Sent registration transaction =====";
 
 ###################################################
 # Install and start cakeshop
